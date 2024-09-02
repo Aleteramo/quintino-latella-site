@@ -4,6 +4,7 @@ import { useSpring, animated, config } from 'react-spring';
 import Typed from 'typed.js';
 import './Home.css';
 import backgroundImage from '../assets/quintino-writing.jpg';
+import BMICalculator from './BMICalculator';
 
 export const Home = () => {
   const typedRef = useRef(null);
@@ -73,6 +74,8 @@ export const Home = () => {
           </animated.div>
         </div>
       </div>
+      <BMICalculator />
+
     </section>
   );
 };
