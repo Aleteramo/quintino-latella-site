@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { useSpring, animated } from 'react-spring';
 import Typed from 'typed.js';
 import './Home.css';
+import backgroundImage from '../assets/quintino-gym.jpg'; // Assicurati che il percorso sia corretto
 
 export const Home = () => {
   const typedRef = useRef(null);
@@ -36,19 +37,18 @@ export const Home = () => {
   }, []);
 
   return (
-    <section id="home" className="home">
-      <div className="container">
-        <animated.div style={parallaxProps} className="home-image">
-          <img src="/path/to/quintino-image.jpg" alt="Quintino Latella" />
-        </animated.div>
-        <div className="home-content">
-          <h1 className="home-title">
-            <span ref={typedRef}></span>
-          </h1>
-          <p className="home-subtitle">
-            Sei pronto a iniziare il tuo viaggio verso un corpo più sano e forte?
-          </p>
-          <a href="#contact" className="btn">Inizia la tua trasformazione ora!</a>
+    <section id="home" className="home" style={{backgroundImage: `url(${backgroundImage})`}}>
+      <div className="overlay">
+        <div className="container">
+          <div className="home-content">
+            <h1 className="home-title">
+              <span ref={typedRef}></span>
+            </h1>
+            <p className="home-subtitle">
+              Sei pronto a iniziare il tuo viaggio verso un corpo più sano e forte?
+            </p>
+            <a href="#contact" className="btn">Inizia la tua trasformazione ora!</a>
+          </div>
         </div>
       </div>
     </section>

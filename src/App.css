@@ -47,3 +47,16 @@ body {
     font-size: 2rem;
   }
 }
+@media (max-width: 768px) {
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .home p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+  }
+}
