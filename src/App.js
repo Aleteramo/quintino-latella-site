@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Navigation } from './components/Navigation';
 import { Home } from './components/Home';
@@ -17,7 +17,6 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './components/BMICalculator.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   useEffect(() => {
