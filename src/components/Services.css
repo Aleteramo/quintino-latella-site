@@ -1,27 +1,25 @@
-.services {
-    padding: 4rem 0;
-    background-color: var(--white);
-  }
-  
+.services-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.service-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
   .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
   .service-card {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 1.5rem;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    width: calc(50% - 20px);
+    margin: 10px;
   }
-  
-  .service-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .service-card h3 {
-    margin-bottom: 1rem;
-  }
+}

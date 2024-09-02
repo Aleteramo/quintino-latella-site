@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Navigation.css';
+import backgroundImage from '../assets/quintino-muscular.jpg';
+
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);

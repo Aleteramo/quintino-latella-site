@@ -6,9 +6,7 @@ export const Footer = () => {
       <div className="footer-content">
         <p>&copy; 2024 Quintino Latella. Tutti i diritti riservati.</p>
         <div className="social-links">
-          <a href="https://instagram.com/quintino_latella" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://facebook.com/quintinolatella" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a href="https://linkedin.com/in/quintinolatella" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://instagram.com/dott.quintinolatella" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </div>
     </footer>
