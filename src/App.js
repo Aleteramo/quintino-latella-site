@@ -17,6 +17,7 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './components/BMICalculator.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   useEffect(() => {
