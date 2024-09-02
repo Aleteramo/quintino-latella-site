@@ -33,16 +33,18 @@ const App = () => {
         <Header />
         <Navigation />
         <main>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-              <About />
-              <Services />
-              <Testimonials />
-              <Contact />
-            </Route>
-            <Route path="/bmi-calculator" component={BMICalculatorPage} />
-          </Switch>
+          <Routes> {/* Sostituiamo Switch con Routes */}
+            <Route path="/" element={ 
+              <> {/* Utilizziamo un frammento React per raggruppare più componenti */}
+                <Home />
+                <About />
+                <Services />
+                <Testimonials />
+                <Contact />
+              </>
+            } />
+            <Route path="/bmi-calculator" element={<BMICalculatorPage />} /> {/* Nuova sintassi per le rotte */}
+          </Routes>
         </main>
         <Footer />
       </div>
