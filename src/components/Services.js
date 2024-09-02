@@ -1,11 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import React, { useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import './Services.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Services = () => {
-  const servicesRef = useRef(null);
-
-  // Definisci l'array dei servizi
   const services = [
     {
       title: "Coaching di fitness e bodybuilding",
@@ -26,30 +32,47 @@ export const Services = () => {
   ];
 
   useEffect(() => {
-    gsap.from(servicesRef.current.children, {
+    gsap.from('.services h2', {
       opacity: 0,
       y: 50,
-      stagger: 0.2,
-      duration: 0.8,
+      duration: 1,
       scrollTrigger: {
-        trigger: servicesRef.current,
-        start: "top bottom-=100",
-        toggleActions: "play none none reverse"
+        trigger: '.services',
+        start: 'top bottom-=100',
+        toggleActions: 'play none none reverse'
       }
     });
   }, []);
 
   return (
-    <section id="services" className="services">
+    <section className="services">
       <h2>I Miei Servizi</h2>
-      <div ref={servicesRef} className="services-grid">
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={'auto'}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        navigation={true}
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className="mySwiper"
+      >
         {services.map((service, index) => (
-          <div key={index} className="service-card">
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </div>
+          <SwiperSlide key={index}>
+            <div className="service-card">
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 };

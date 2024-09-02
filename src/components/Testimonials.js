@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import './Testimonials.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './Testimonials.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,42 +12,37 @@ export const Testimonials = () => {
     { name: "Giovanni", text: "Ho provato molti programmi di fitness, ma nessuno è come quello di Quintino. I risultati parlano da soli!", image: "/path/to/giovanni-image.jpg" }
   ];
 
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
-
   useEffect(() => {
-    gsap.from(sectionRef.current, {
+    gsap.from('.testimonials h2', {
       opacity: 0,
       y: 50,
       duration: 1,
       scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top bottom-=100",
-        toggleActions: "play none none reverse"
+        trigger: '.testimonials',
+        start: 'top bottom-=100',
+        toggleActions: 'play none none reverse'
       }
     });
 
-    cardsRef.current.forEach((card, index) => {
-      gsap.from(card, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        delay: index * 0.2,
-        scrollTrigger: {
-          trigger: card,
-          start: "top bottom-=50",
-          toggleActions: "play none none reverse"
-        }
-      });
+    gsap.from('.testimonial-card', {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: '.testimonial-grid',
+        start: 'top bottom-=100',
+        toggleActions: 'play none none reverse'
+      }
     });
   }, []);
 
   return (
-    <section id="testimonials" className="testimonials" ref={sectionRef}>
+    <section className="testimonials">
       <h2>Testimonianze</h2>
       <div className="testimonial-grid">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="testimonial-card" ref={el => cardsRef.current[index] = el}>
+          <div key={index} className="testimonial-card">
             <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
             <p className="testimonial-text">"{testimonial.text}"</p>
             <p className="testimonial-name">- {testimonial.name}</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Header } from './components/Header';
 import { Navigation } from './components/Navigation';
 import { Home } from './components/Home';
@@ -8,34 +8,25 @@ import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import './App.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState('home');
-
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'services', 'testimonials', 'contact'];
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
   }, []);
 
   return (
     <div className="App">
       <Header />
-      <Navigation activeSection={activeSection} />
+      <Navigation />
       <main>
         <Home />
         <About />
