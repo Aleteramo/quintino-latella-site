@@ -1,0 +1,25 @@
+import React from 'react';
+import './Testimonials.css';
+
+export const Testimonials = () => {
+  const testimonials = [
+    { name: "Marco", text: "Grazie a Quintino ho trasformato il mio fisico in soli 6 mesi. Il suo approccio personalizzato fa davvero la differenza!", image: "/path/to/marco-image.jpg" },
+    { name: "Laura", text: "Il Metodo QL mi ha aiutato non solo a perdere peso, ma anche a ritrovare fiducia in me stessa. Quintino è un coach eccezionale!", image: "/path/to/laura-image.jpg" },
+    { name: "Giovanni", text: "Ho provato molti programmi di fitness, ma nessuno è come quello di Quintino. I risultati parlano da soli!", image: "/path/to/giovanni-image.jpg" }
+  ];
+
+  return (
+    <section id="testimonials" className="testimonials">
+      <h2 className="animate-fade-in">Testimonianze</h2>
+      <div className="testimonial-grid">
+        {testimonials.map((testimonial, index) => (
+          <div key={index} className="testimonial-card animate-slide-up">
+            <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
+            <p className="testimonial-text">"{testimonial.text}"</p>
+            <p className="testimonial-name">- {testimonial.name}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
