@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/quintino-latella-site/static/css/main.e6ddbf26.css",
+    "main.js": "/quintino-latella-site/static/js/main.b4c3094a.js",
+    "static/js/453.4a81b856.chunk.js": "/quintino-latella-site/static/js/453.4a81b856.chunk.js",
+    "index.html": "/quintino-latella-site/index.html",
+    "main.e6ddbf26.css.map": "/quintino-latella-site/static/css/main.e6ddbf26.css.map",
+    "main.b4c3094a.js.map": "/quintino-latella-site/static/js/main.b4c3094a.js.map",
+    "453.4a81b856.chunk.js.map": "/quintino-latella-site/static/js/453.4a81b856.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6ddbf26.css",
+    "static/js/main.b4c3094a.js"
+  ]
+}
