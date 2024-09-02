@@ -109,3 +109,7 @@
       object-fit: cover;
     }
   }
+  .bmi-btn {
+    margin-left: 10px;
+    background-color: #4CAF50;
+  }

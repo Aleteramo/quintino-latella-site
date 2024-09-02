@@ -146,13 +146,18 @@ const BMICalculator = () => {
                   <Line type="monotone" dataKey="calories" stroke="#8884d8" />
                 </LineChart>
               </ResponsiveContainer>
-              <motion.button
+
+              {/* Correzione: utilizzo di <motion.a> */}
+              <motion.a
+                href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="cta-button"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => window.location.href = 'https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit'}
               >
-                Ottieni un piano personalizzato
-              </motion.button>
+                Ottieni una consulenza personalizzata
+              </motion.a>
             </motion.div>
           )}
         </AnimatePresence>
