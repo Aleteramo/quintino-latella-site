@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/quintino-latella-site/static/css/main.5f2b8325.css",
-    "main.js": "/quintino-latella-site/static/js/main.07ec6859.js",
+    "main.css": "/quintino-latella-site/static/css/main.30fc4ab9.css",
+    "main.js": "/quintino-latella-site/static/js/main.e4f04be0.js",
     "static/js/453.9d90b703.chunk.js": "/quintino-latella-site/static/js/453.9d90b703.chunk.js",
     "static/media/quintino-writing.jpg": "/quintino-latella-site/static/media/quintino-writing.dea2c10a12693211c972.jpg",
     "static/media/quintino-muscular.jpg": "/quintino-latella-site/static/media/quintino-muscular.fdd705a7ffb85e31283d.jpg",
     "index.html": "/quintino-latella-site/index.html",
-    "main.5f2b8325.css.map": "/quintino-latella-site/static/css/main.5f2b8325.css.map",
-    "main.07ec6859.js.map": "/quintino-latella-site/static/js/main.07ec6859.js.map",
+    "main.30fc4ab9.css.map": "/quintino-latella-site/static/css/main.30fc4ab9.css.map",
+    "main.e4f04be0.js.map": "/quintino-latella-site/static/js/main.e4f04be0.js.map",
     "453.9d90b703.chunk.js.map": "/quintino-latella-site/static/js/453.9d90b703.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f2b8325.css",
-    "static/js/main.07ec6859.js"
+    "static/css/main.30fc4ab9.css",
+    "static/js/main.e4f04be0.js"
   ]
 }
