@@ -189,45 +189,11 @@ const BMICalculator = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-<<<<<<< HEAD
               Ottieni un piano personalizzato
             </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
-=======
-              <h3>Risultati</h3>
-              <p>Il tuo BMI è: {bmi}</p>
-              <p>Il tuo fabbisogno calorico giornaliero è: {calories} kcal</p>
-              <Canvas>
-                <BMIVisualizer bmi={bmi} />
-              </Canvas>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={generateCalorieData()}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="calories" stroke="#8884d8" />
-                </LineChart>
-              </ResponsiveContainer>
-
-              {/* Correzione: utilizzo di <motion.a> */}
-              <motion.a
-                href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="cta-button"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                Ottieni una consulenza personalizzata
-              </motion.a>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
->>>>>>> 5ea945e319d84237b1db567f23304c5ba530f2b4
     </div>
   );
 };
