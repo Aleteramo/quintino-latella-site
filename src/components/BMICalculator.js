@@ -1,162 +1,199 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './BMICalculator.css';
 
+const InputField = ({ label, value, onChange, id }) => (
+  <div className="input-field">
+    <label htmlFor={id}>{label}</label>
+    <div className="input-wrapper">
+      <input
+        type="number"
+        id={id}
+        value={value}
+        onChange={onChange}
+        min="0"
+        max="999"
+      />
+      {value && (
+        <button className="clear-input" onClick={() => onChange({ target: { value: '' } })}>
+          ×
+        </button>
+      )}
+    </div>
+  </div>
+);
+
 const BMICalculator = () => {
-  const [height, setHeight] = useState(170);
-  const [weight, setWeight] = useState(70);
-  const [age, setAge] = useState(30);
+  const [height, setHeight] = useState('170');
+  const [weight, setWeight] = useState('70');
+  const [age, setAge] = useState('30');
   const [gender, setGender] = useState('male');
   const [activityLevel, setActivityLevel] = useState('moderate');
   const [bmi, setBMI] = useState(null);
   const [calories, setCalories] = useState(null);
   const [showResults, setShowResults] = useState(false);
 
-  useEffect(() => {
-    calculateBMI();
-    calculateCalories();
-  }, [height, weight, age, gender, activityLevel]);
-
   const calculateBMI = () => {
-    const bmiValue = weight / ((height / 100) * (height / 100));
-    setBMI(bmiValue.toFixed(1));
-  };
-
-  const calculateCalories = () => {
-    let bmr;
-    if (gender === 'male') {
-      bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+    if (height && weight) {
+      const bmiValue = Number(weight) / ((Number(height) / 100) * (Number(height) / 100));
+      setBMI(bmiValue.toFixed(1));
     } else {
-      bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+      setBMI(null);
     }
-
-    const activityFactors = {
-      sedentary: 1.2,
-      light: 1.375,
-      moderate: 1.55,
-      active: 1.725,
-      veryActive: 1.9
-    };
-
-    setCalories(Math.round(bmr * activityFactors[activityLevel]));
+  };
+  
+  const calculateCalories = () => {
+    if (height && weight && age) {
+      let bmr;
+      if (gender === 'male') {
+        bmr = 88.362 + (13.397 * Number(weight)) + (4.799 * Number(height)) - (5.677 * Number(age));
+      } else {
+        bmr = 447.593 + (9.247 * Number(weight)) + (3.098 * Number(height)) - (4.330 * Number(age));
+      }
+  
+      const activityFactors = {
+        sedentary: 1.2,
+        light: 1.375,
+        moderate: 1.55,
+        active: 1.725,
+        veryActive: 1.9
+      };
+  
+      setCalories(Math.round(bmr * activityFactors[activityLevel]));
+    } else {
+      setCalories(null);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    calculateBMI();
+    calculateCalories();
     setShowResults(true);
   };
+
+  const handleInputChange = (setter) => (e) => {
+    const value = e.target.value;
+    if (value === '' || (Number(value) >= 0 && Number(value) <= 999)) {
+      setter(value);
+    }
+  };
+
+  useEffect(() => {
+    if (showResults) {
+      const resultsElement = document.querySelector('.results');
+      if (resultsElement) {
+        resultsElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [showResults]);
 
   return (
     <div className="bmi-calculator">
       <h2>Calcolatore BMI e Fabbisogno Calorico</h2>
-      <div className="calculator-container">
-        <form onSubmit={handleSubmit}>
-          <motion.div className="input-group" whileHover={{ scale: 1.05 }}>
-            <label htmlFor="height">Altezza (cm)</label>
+      <form onSubmit={handleSubmit}>
+        <InputField label="Altezza (cm)" value={height} onChange={handleInputChange(setHeight)} id="height" />
+        <InputField label="Peso (kg)" value={weight} onChange={handleInputChange(setWeight)} id="weight" />
+        <InputField label="Età" value={age} onChange={handleInputChange(setAge)} id="age" />
+        
+        <div className="input-field">
+          <label>Genere</label>
+          <div className="radio-group">
             <input
-              type="number"
-              id="height"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
+              type="radio"
+              id="male"
+              value="male"
+              checked={gender === 'male'}
+              onChange={(e) => setGender(e.target.value)}
             />
-          </motion.div>
-          <motion.div className="input-group" whileHover={{ scale: 1.05 }}>
-            <label htmlFor="weight">Peso (kg)</label>
+            <label htmlFor="male">Maschio</label>
             <input
-              type="number"
-              id="weight"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
+              type="radio"
+              id="female"
+              value="female"
+              checked={gender === 'female'}
+              onChange={(e) => setGender(e.target.value)}
             />
-          </motion.div>
-          <motion.div className="input-group" whileHover={{ scale: 1.05 }}>
-            <label htmlFor="age">Età</label>
-            <input
-              type="number"
-              id="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
-          </motion.div>
-          <motion.div className="input-group" whileHover={{ scale: 1.05 }}>
-            <label>Genere</label>
-            <div className="radio-group">
-              <input
-                type="radio"
-                id="male"
-                value="male"
-                checked={gender === 'male'}
-                onChange={(e) => setGender(e.target.value)}
-              />
-              <label htmlFor="male">Maschio</label>
-              <input
-                type="radio"
-                id="female"
-                value="female"
-                checked={gender === 'female'}
-                onChange={(e) => setGender(e.target.value)}
-              />
-              <label htmlFor="female">Femmina</label>
-            </div>
-          </motion.div>
-          <motion.div className="input-group" whileHover={{ scale: 1.05 }}>
-            <label htmlFor="activity">Livello di Attività</label>
-            <select
-              id="activity"
-              value={activityLevel}
-              onChange={(e) => setActivityLevel(e.target.value)}
-            >
-              <option value="sedentary">Sedentario</option>
-              <option value="light">Leggera attività</option>
-              <option value="moderate">Moderata attività</option>
-              <option value="active">Attiva</option>
-              <option value="veryActive">Molto attiva</option>
-            </select>
-          </motion.div>
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            <label htmlFor="female">Femmina</label>
+          </div>
+        </div>
+        
+        <div className="input-field">
+          <label htmlFor="activity">Livello di Attività</label>
+          <select
+            id="activity"
+            value={activityLevel}
+            onChange={(e) => setActivityLevel(e.target.value)}
           >
-            Calcola
-          </motion.button>
-        </form>
-        <AnimatePresence>
-          {showResults && (
-            <motion.div
-              className="results"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+            <option value="sedentary">Sedentario</option>
+            <option value="light">Leggera attività</option>
+            <option value="moderate">Moderata attività</option>
+            <option value="active">Attiva</option>
+            <option value="veryActive">Molto attiva</option>
+          </select>
+        </div>
+        
+        <motion.button
+          type="submit"
+          className="submit-button"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Calcola
+        </motion.button>
+      </form>
+      
+      <AnimatePresence>
+        {showResults && (
+          <motion.div
+            className="results"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <div className="results-summary">
+              <div className="result-item">
+                <span className="result-label">BMI:</span>
+                <span className="result-value">{bmi || 'N/A'}</span>
+              </div>
+              <div className="result-item">
+                <span className="result-label">Fabbisogno calorico:</span>
+                <span className="result-value">{calories ? `${calories} kcal` : 'N/A'}</span>
+              </div>
+            </div>
+            <div className="results-visuals">
+              <div className="bmi-visualizer">
+                <Canvas>
+                  <BMIVisualizer bmi={bmi} />
+                </Canvas>
+              </div>
+              <div className="calorie-chart">
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart data={generateCalorieData()}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="calories" stroke="#8884d8" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+            <motion.a
+              href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-button"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <h3>Risultati</h3>
-              <p>Il tuo BMI è: {bmi}</p>
-              <p>Il tuo fabbisogno calorico giornaliero è: {calories} kcal</p>
-              <Canvas>
-                <BMIVisualizer bmi={bmi} />
-              </Canvas>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={generateCalorieData()}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="calories" stroke="#8884d8" />
-                </LineChart>
-              </ResponsiveContainer>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => window.location.href = 'https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit'}
-              >
-                Ottieni un piano personalizzato
-              </motion.button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              Ottieni un piano personalizzato
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -179,7 +216,7 @@ const BMIVisualizer = ({ bmi }) => {
   };
 
   return (
-    <mesh ref={meshRef}>
+    <mesh ref={meshRef} scale={[0.5, 0.5, 0.5]}>
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial color={getColor()} />
       <ambientLight intensity={0.5} />

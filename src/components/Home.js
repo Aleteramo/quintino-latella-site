@@ -4,7 +4,6 @@ import { useSpring, animated, config } from 'react-spring';
 import Typed from 'typed.js';
 import './Home.css';
 import backgroundImage from '../assets/quintino-writing.jpg';
-import BMICalculator from './BMICalculator';
 
 export const Home = () => {
   const typedRef = useRef(null);
@@ -59,23 +58,21 @@ export const Home = () => {
               Sei pronto a iniziare il tuo viaggio verso un corpo più sano e forte?
             </p>
             <animated.a 
-  href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn"
-  style={useSpring({
-    from: { opacity: 0, transform: 'scale(0.8)' },
-    to: { opacity: 1, transform: 'scale(1)' },
-    delay: 1000,
-  })}
->
-  Inizia la tua trasformazione ora!
-</animated.a>
+              href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={useSpring({
+                from: { opacity: 0, transform: 'scale(0.8)' },
+                to: { opacity: 1, transform: 'scale(1)' },
+                delay: 1000,
+              })}
+            >
+              Inizia la tua trasformazione ora!
+            </animated.a>
           </animated.div>
         </div>
       </div>
-      <BMICalculator />
-
     </section>
   );
 };

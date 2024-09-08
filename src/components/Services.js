@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import './Services.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import BMICalculator from './BMICalculator';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,6 +74,10 @@ export const Services = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="bmi-calculator-container">
+        <h3>Calcolatore BMI e Fabbisogno Calorico</h3>
+        <BMICalculator />
+      </div>
     </section>
   );
 };
