@@ -70,6 +70,12 @@ export const Home = () => {
             >
               Inizia la tua trasformazione ora!
             </animated.a>
+<<<<<<< HEAD
+=======
+            <Link to="/bmi-calculator" className="btn bmi-btn">
+              Calcola il tuo BMI e fabbisogno calorico
+            </Link>
+>>>>>>> 5ea945e319d84237b1db567f23304c5ba530f2b4
           </animated.div>
         </div>
       </div>
