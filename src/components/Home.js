@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useSpring, animated, config } from 'react-spring';
 import Typed from 'typed.js';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import backgroundImage from '../assets/quintino-writing.jpg';
 
@@ -57,7 +58,7 @@ export const Home = () => {
             <p className="home-subtitle">
               Sei pronto a iniziare il tuo viaggio verso un corpo più sano e forte?
             </p>
-            <animated.a 
+            <animated.a
               href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
               target="_blank"
               rel="noopener noreferrer"
@@ -70,12 +71,9 @@ export const Home = () => {
             >
               Inizia la tua trasformazione ora!
             </animated.a>
-<<<<<<< HEAD
-=======
             <Link to="/bmi-calculator" className="btn bmi-btn">
               Calcola il tuo BMI e fabbisogno calorico
             </Link>
->>>>>>> 5ea945e319d84237b1db567f23304c5ba530f2b4
           </animated.div>
         </div>
       </div>
