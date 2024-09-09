@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { useSpring, animated, config } from 'react-spring';
 import Typed from 'typed.js';
 import './Home.css';
 import backgroundImage from '../assets/quintino-writing.jpg';
-import BMICalculator from './BMICalculator';
 
 export const Home = () => {
   const typedRef = useRef(null);
