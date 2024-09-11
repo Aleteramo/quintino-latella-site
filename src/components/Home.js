@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { useSpring, animated, config } from 'react-spring';
 import Typed from 'typed.js';
@@ -71,9 +70,6 @@ export const Home = () => {
             >
               Inizia la tua trasformazione ora!
             </animated.a>
-            <Link to="/bmi-calculator" className="btn bmi-btn">
-              Calcola il tuo BMI e fabbisogno calorico
-            </Link>
           </animated.div>
         </div>
       </div>

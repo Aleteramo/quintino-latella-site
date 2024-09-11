@@ -32,7 +32,7 @@ export const Services = () => {
   ];
 
   useEffect(() => {
-    gsap.from('.services h2', {
+    const animation = gsap.from('.services h2', {
       opacity: 0,
       y: 50,
       duration: 1,
@@ -42,10 +42,14 @@ export const Services = () => {
         toggleActions: 'play none none reverse'
       }
     });
+
+    return () => {
+      animation.kill(); // Clean up animation on component unmount
+    };
   }, []);
 
   return (
-    <section className="services">
+    <section id="services" className="services">
       <h2>I Miei Servizi</h2>
       <Swiper
         effect={'coverflow'}
@@ -63,6 +67,7 @@ export const Services = () => {
         navigation={true}
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="mySwiper"
+        touchReleaseOnEdges={true}
       >
         {services.map((service, index) => (
           <SwiperSlide key={index}>

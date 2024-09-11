@@ -11,6 +11,7 @@ body {
   line-height: 1.6;
   color: var(--black);
   background-color: var(--white);
+  scroll-padding-top: 60px; /* Adjust this value based on your header height */
 }
 
 .container {
@@ -64,4 +65,19 @@ body {
   .cta-button {
     padding: 0.8rem 1.5rem;
   }
+}
+
+
+section {
+  padding-top: 60px; /* Aggiusta questo valore in base all'altezza del tuo header */
+  margin-top: -60px;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+#services, #testimonials {
+  scroll-margin-top: 60px; /* Same as scroll-padding-top */
 }

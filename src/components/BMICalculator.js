@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -14,17 +14,12 @@ const BMICalculator = () => {
   const [calories, setCalories] = useState(null);
   const [showResults, setShowResults] = useState(false);
 
-  useEffect(() => {
-    calculateBMI();
-    calculateCalories();
-  }, [height, weight, age, gender, activityLevel]);
-
-  const calculateBMI = () => {
+  const calculateBMI = useCallback(() => {
     const bmiValue = weight / ((height / 100) * (height / 100));
     setBMI(bmiValue.toFixed(1));
-  };
+  }, [weight, height]);
 
-  const calculateCalories = () => {
+  const calculateCalories = useCallback(() => {
     let bmr;
     if (gender === 'male') {
       bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
@@ -41,7 +36,12 @@ const BMICalculator = () => {
     };
 
     setCalories(Math.round(bmr * activityFactors[activityLevel]));
-  };
+  }, [weight, height, age, gender, activityLevel]);
+
+  useEffect(() => {
+    calculateBMI();
+    calculateCalories();
+  }, [calculateBMI, calculateCalories]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ const BMICalculator = () => {
   };
 
   return (
-    <div className="bmi-calculator">
+    <div id="bmi-calculator" className="bmi-calculator">
       <h2>Calcolatore BMI e Fabbisogno Calorico</h2>
       <div className="calculator-container">
         <form onSubmit={handleSubmit}>
@@ -122,7 +122,7 @@ const BMICalculator = () => {
           >
             Calcola
           </motion.button>
-        </form>
+          </form>
         <AnimatePresence>
           {showResults && (
             <motion.div
@@ -134,27 +134,29 @@ const BMICalculator = () => {
               <h3>Risultati</h3>
               <p>Il tuo BMI è: {bmi}</p>
               <p>Il tuo fabbisogno calorico giornaliero è: {calories} kcal</p>
-              <Canvas>
-                <BMIVisualizer bmi={bmi} />
-              </Canvas>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={generateCalorieData()}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="calories" stroke="#8884d8" />
-                </LineChart>
-              </ResponsiveContainer>
-
-              {/* Correzione: utilizzo di <motion.a> */}
+              <div className="bmi-visualizer">
+                <Canvas>
+                  <BMIVisualizer bmi={bmi} />
+                </Canvas>
+              </div>
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={generateCalorieData()}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="calories" stroke="#8884d8" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
               <motion.a
                 href="https://docs.google.com/forms/d/1DNV4ILY1yXnH-Vbkdhk5ZdRSRA0RkFT4sX8rT8HbN9E/edit"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="cta-button"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Ottieni una consulenza personalizzata
               </motion.a>
@@ -184,7 +186,7 @@ const BMIVisualizer = ({ bmi }) => {
   };
 
   return (
-    <mesh ref={meshRef}>
+    <mesh ref={meshRef} scale={[0.4, 0.4, 0.4]}>
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial color={getColor()} />
       <ambientLight intensity={0.5} />
