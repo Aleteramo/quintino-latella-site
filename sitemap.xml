@@ -7,27 +7,40 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://aleteramo.github.io/quintino-latella-site/#about</loc>
+    <loc>https://aleteramo.github.io/quintino-latella-site/about</loc>
     <lastmod>2024-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aleteramo.github.io/quintino-latella-site/#services</loc>
+    <loc>https://aleteramo.github.io/quintino-latella-site/services</loc>
     <lastmod>2024-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aleteramo.github.io/quintino-latella-site/#testimonials</loc>
+    <loc>https://aleteramo.github.io/quintino-latella-site/testimonials</loc>
     <lastmod>2024-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aleteramo.github.io/quintino-latella-site/#contact</loc>
+    <loc>https://aleteramo.github.io/quintino-latella-site/contact</loc>
     <lastmod>2024-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://aleteramo.github.io/quintino-latella-site/blog</loc>
+    <lastmod>2024-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Aggiungi qui le URL dei tuoi post del blog individuali -->
+  <url>
+    <loc>https://aleteramo.github.io/quintino-latella-site/blog/esercizi-massa-muscolare</loc>
+    <lastmod>2024-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
